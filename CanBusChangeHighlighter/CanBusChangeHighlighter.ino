@@ -19,7 +19,7 @@ void setup() {
   mcp2515.setBitrate(CAN_BUS_SPEED, MCP_CLOCK);
   mcp2515.setListenOnlyMode();
 
-  attachInterrupt(MCP2515_INTERRUPT_PIN, irqHandler, FALLING);
+  attachInterrupt(MCP2515_INTERRUPT_NUMBER, irqHandler, FALLING);
 }
 
 void loop() {
