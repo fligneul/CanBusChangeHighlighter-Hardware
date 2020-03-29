@@ -44,14 +44,12 @@ void loop() {
 }
 
 void serialWriteMessage(can_frame frame) {
-  // Write CANBus message ID
-  Serial.write((byte*)&frame.can_id, sizeof(frame.can_id));
-  // Write CANBus frame payload length
-  Serial.write(frame.can_dlc);
-  // Write CANBus message Data
-  for (int i = 0; i < frame.can_dlc; i++)  {
-    Serial.write(frame.data[i]);
-  }
-  // Write EOL for message parsing
-  Serial.write('\n');
+  // Write CANBus message
+  // 4 bytes: ID
+  // 1 byte: DLC
+  // 3 bytes: padding
+  // 8 bytes: data
+  // -> 16 bytes
+  Serial.write((byte*)&frame, sizeof(frame));
+  Serial.flush();
 }
